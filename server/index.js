@@ -2,12 +2,12 @@ const express = require('express');
 const dotenv = require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 5000;
-const connection = require('./db');
+const connectDb= require('./config/db');
 const { errorHandler } = require('./middleware/errorMiddleware');
 const goalRoutes = require('./routes/goalRoutes');
 
 //database connection
-connection();
+connectDb()
 
 // middlewares
 app.use(express.json());
