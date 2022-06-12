@@ -1,11 +1,11 @@
 const asyncHandler = require('express-async-handler');
-const Goal = require('../model/goalModel');
+const Goals = require('../model/goalModel');
 
 // Get All Goals
 // GET /api/Goals
 // Private
 const getGoals = asyncHandler(async(req,res) => {
-    const goals = await Goal.find();
+    const goals = await Goals.find();
     res.status(200).json(goals)
 })
 
@@ -17,7 +17,7 @@ const setGoal = asyncHandler(async(req,res) => {
         res.status(404)
         throw new Error('please add a text field')
     }else{
-        const goal = await Goal.create({
+        const goal = await Goals.create({
             text: req.body.text
         })
         res.status(200).json(goal)
@@ -30,7 +30,7 @@ const setGoal = asyncHandler(async(req,res) => {
 // PUT /api/Goal:id
 // Private
 const updateGoal = asyncHandler(async(req,res) => {
-    const goal = await Goal.findById(req.params.id)
+    const goal = await Goals.findById(req.params.id)
     if(!goal){
         res.status(400)
         throw new Error('goal not found')
@@ -45,7 +45,7 @@ const updateGoal = asyncHandler(async(req,res) => {
 // DELETE /api/Goals:id
 // Private
 const deleteGoal = asyncHandler(async(req,res) => {
-    const goal = await Goal.findById(req.params.id)
+    const goal = await Goals.findById(req.params.id)
     if(!goal){
         res.status(400)
         throw new Error('goal not found')
